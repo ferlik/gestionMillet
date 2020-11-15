@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commande index{% endblock %}
+
+{% block body %}
+{% include 'parts/header.html.twig' %}
+<h1>Commande index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Date</th>
+            <th>Client</th>
+            <th>article</th>
+            <th>actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for commande in commandes %}
+        <tr>
+            <td>{{ commande.id }}</td>
+            <td>{{ commande.date ? commande.date|date('Y-m-d') : '' }}</td>
+            <td>{{ commande.client}}</td>
+
+
+
+            <td>
+                <a href="{{ path('commande_show', {'id': commande.id}) }}">Détail</a>
+                <a href="{{ path('commande_edit', {'id': commande.id}) }}">Modifier</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="3">no records found</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{{ path('commande_new') }}">Ajouter un bon de commande</a>
+{% endblock %}
